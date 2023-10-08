@@ -26,7 +26,7 @@ jobs:
       #   uses: docker/setup-docker@v2
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --alien_invasion:lastest
+        run: docker build . --file Dockerfile --alien_invasion:latest
 
       # - name: Build Docker Image
       #   run: |
