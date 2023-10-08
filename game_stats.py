@@ -1,15 +1,13 @@
-#######################################################
-# Program   : game_stats.py
-# Author    : Aaron Rioflorido
-#
-# Function  : Stores the GameStats class for the Alien Invasion game.
-#
-#######################################################
+"""
+Program   : game_stats.py
+Author    : Aaron Rioflorido
+Function  : Contains the GameStats class for the Alien Invasion game.
+"""
 from game_functions import load_high_score
 
 
 class GameStats:
-    """Track statistics for Alien Invasion"""
+    """Track statistics for Alien Invasion."""
 
     def __init__(self, ai_settings):
         """Initialize statistics."""
@@ -31,4 +29,3 @@ class GameStats:
         self.ships_left = self.ai_settings.ship_limit
         self.score = 0
         self.level = 1
-

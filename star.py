@@ -1,11 +1,9 @@
-#######################################################
-# Program   : star.py
-# Author    : Aaron Rioflorido
-#
-# Function  : Stores the Star class.
-#
-#######################################################
-import pygame
+"""
+Program   : star.py
+Author    : Aaron Rioflorido
+Function  : Contains the Star class for the Alien Invasion Game.
+"""
+from pygame import image
 from pygame.sprite import Sprite
 
 
@@ -20,7 +18,7 @@ class Star(Sprite):
         self.screen_rect = screen.get_rect()
 
         # Load the alien image and set its rect attribute.
-        self.image = pygame.image.load('images/star.bmp')
+        self.image = image.load("images/star.bmp")
         self.rect = self.image.get_rect()
 
         # Start each new star near the top left of the screen

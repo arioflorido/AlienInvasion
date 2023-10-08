@@ -1,15 +1,13 @@
-#######################################################
-# Program   : button.py
-# Author    : Aaron Rioflorido
-#
-# Function  : Stores the Button class for the Alien Invasion game.
-#
-#######################################################
+"""
+Program   : button.py
+Author    : Aaron Rioflorido
+Function  : Contains the Button class for the Alien Invasion game.
+"""
 import pygame.font
 
 
 class Button:
-    """Represent the buttons in the Alien Invasion game"""
+    """Represent the buttons in the Alien Invasion game."""
 
     def __init__(self, ai_settings, screen, msg):
         """Initialize button attributes."""
@@ -32,7 +30,7 @@ class Button:
         self.prep_msg(msg)
 
     def prep_msg(self, msg):
-        """Turn msg into a rendered image and center text on the button"""
+        """Turn msg into a rendered image and center text on the button."""
         self.msg_image = self.font.render(msg, True, self.text_color, self.button_color)
         self.msg_image_rect = self.msg_image.get_rect()
         self.msg_image_rect.center = self.rect.center

@@ -1,16 +1,16 @@
-#######################################################
-# Program   : game_functions.py
-# Author    : Aaron Rioflorido
-#
-# Function  : Stores the game functions for the Alien Invasion game.
-#
-#######################################################
-import sys, pygame, json
+"""
+Program   : game_functions.py
+Author    : Aaron Rioflorido
+Function  : Contains the game functions for the Alien Invasion game.
+"""
+import sys
+from random import randint
+from time import sleep
+import json
+import pygame
 from bullet import Bullet
 from alien import Alien
 from star import Star
-from random import randint
-from time import sleep
 
 
 def fire_bullet(ai_settings, screen, ship, bullets):
@@ -42,14 +42,17 @@ def start_game(ai_settings, screen, stats, sb, ship, aliens, bullets):
 
 
 def load_high_score(ai_settings, stats):
-    """Load saved high score."""
+    """Load the saved high score."""
     try:
-        with open(ai_settings.hs_save_file) as fileObj:
-            stats.high_score = json.load(fileObj)
+        with open(ai_settings.hs_save_file) as file_handle:
+            stats.high_score = json.load(file_handle)
     except PermissionError as exception_msg:
-        abort_program("Unable to load '{}'.".format(ai_settings.hs_save_file), exception_msg)
+        abort_program(f"Unable to load '{ai_settings.hs_save_file}'.", exception_msg)
     except IsADirectoryError as exception_msg:
-        abort_program("'{}' is a directory instead of a file.".format(ai_settings.hs_save_file), exception_msg)
+        abort_program(
+            f"'{ai_settings.hs_save_file}' is a directory instead of a file.",
+            exception_msg,
+        )
     except FileNotFoundError:
         stats.high_score = 0
 
@@ -57,12 +60,15 @@ def load_high_score(ai_settings, stats):
 def save_high_score(ai_settings, stats):
     """Save the high score to a file."""
     try:
-        with open(ai_settings.hs_save_file, 'w') as fileObj:
-            json.dump(stats.high_score, fileObj)
+        with open(ai_settings.hs_save_file, "w") as file_handle:
+            json.dump(stats.high_score, file_handle)
     except PermissionError as exception_msg:
-        abort_program("Unable to save '{}'.".format(ai_settings.hs_save_file), exception_msg)
+        abort_program(f"Unable to save '{ai_settings.hs_save_file}'.", exception_msg)
     except IsADirectoryError as exception_msg:
-        abort_program("'{}' is a directory instead of a file.".format(ai_settings.hs_save_file), exception_msg)
+        abort_program(
+            f"'{ai_settings.hs_save_file}' is a directory instead of a file.",
+            exception_msg,
+        )
 
 
 def check_keydown_events(event, ai_settings, screen, stats, sb, ship, aliens, bullets):
@@ -100,7 +106,9 @@ def check_keyup_events(event, ship):
         ship.turbo_mode = False
 
 
-def check_play_button(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button, mouse_x, mouse_y):
+def check_play_button(
+    ai_settings, screen, stats, sb, ship, aliens, bullets, play_button, mouse_x, mouse_y
+):
     """Start a new game when the player clicks the Play button."""
     play_button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
 
@@ -115,12 +123,28 @@ def check_events(ai_settings, screen, stats, sb, ship, aliens, bullets, play_but
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, stats, sb, ship, aliens, bullets)
+            check_keydown_events(
+                event, ai_settings, screen, stats, sb, ship, aliens, bullets
+            )
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pygame.mouse.get_pos() # Mouse cursor x and y coordinates
-            check_play_button(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button, mouse_x, mouse_y)
+            (
+                mouse_x,
+                mouse_y,
+            ) = pygame.mouse.get_pos()  # Mouse cursor x and y coordinates
+            check_play_button(
+                ai_settings,
+                screen,
+                stats,
+                sb,
+                ship,
+                aliens,
+                bullets,
+                play_button,
+                mouse_x,
+                mouse_y,
+            )
 
 
 def get_number_alien_x(ai_settings, alien_width):
@@ -153,7 +177,11 @@ def create_fleet(ai_settings, screen, ship, aliens):
     number_rows = get_number_rows(ai_settings, ship.rect.height, alien.rect.height)
 
     # Create the fleet of aliens.
-    [create_alien(ai_settings, screen, aliens, alien_number, row_number) for row_number in range(number_rows) for alien_number in range(number_aliens_x)]
+    [
+        create_alien(ai_settings, screen, aliens, alien_number, row_number)
+        for row_number in range(number_rows)
+        for alien_number in range(number_aliens_x)
+    ]
 
 
 def change_fleet_direction(ai_settings, aliens):
@@ -226,7 +254,9 @@ def check_high_score(ai_settings, stats, sb):
         save_high_score(ai_settings, stats)
 
 
-def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets):
+def check_bullet_alien_collisions(
+    ai_settings, screen, stats, sb, ship, aliens, bullets
+):
     """Respond to bullet-alien collisions."""
     # Remove any bullets and aliens that have collided.
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
@@ -266,7 +296,9 @@ def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
     check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets)
 
 
-def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, stars, play_button):
+def update_screen(
+    ai_settings, screen, stats, sb, ship, aliens, bullets, stars, play_button
+):
     """Update images on the screen and flip to the new screen."""
 
     # Redraw the screen during each pass through the loop.
@@ -311,5 +343,5 @@ def abort_program(err_msg, exception_msg=None):
     """Display error message then abort the program."""
     print("Error:", err_msg)
     if exception_msg:
-        print("Exception : {}".format(exception_msg))
+        print(f"Exception : {exception_msg}")
     sys.exit(1)

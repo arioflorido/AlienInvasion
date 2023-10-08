@@ -1,10 +1,8 @@
-#######################################################
-# Program   : settings.py
-# Author    : Aaron Rioflorido
-#
-# Function  : Contains the all the settings for the Alien Invasion game.
-#
-#######################################################
+"""
+Program   : settings.py
+Author    : Aaron Rioflorido
+Function  : Stores all the settings for the Alien Invasion game.
+"""
 
 
 class Settings:
@@ -36,11 +34,15 @@ class Settings:
 
         # How quickly the game speeds up upon leveling up
         self.speedup_scale = 1.25
+
         # How quickly the alien point values increase
         self.score_scale = 1.5
 
+        # Scoring
+        self.alien_points = 50
+
         # High score save file
-        self.hs_save_file = 'high_score.json'
+        self.hs_save_file = "high_score.json"
 
     def initialize_dynamic_settings(self):
         """Initialize settings that change throughout the game."""
@@ -51,13 +53,9 @@ class Settings:
         # fleet_direction of 1 represents right; -1 represents left
         self.fleet_direction = 1
 
-        # Scoring
-        self.alien_points = 50
-
     def increase_speed(self):
         """Increase speed settings and alien point values."""
         self.ship_speed_factor *= self.speedup_scale
         self.bullet_speed_factor *= self.speedup_scale
         self.alien_speed_factor *= self.speedup_scale
-        self.alien_points = int(self.alien_points * self.score_scale)
-
+        self.alien_points = self.alien_points * self.score_scale
