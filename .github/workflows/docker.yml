@@ -1,13 +1,13 @@
 name: Docker Image CI
 
 on:
-  workflow_run:
-    workflows: ["AlienInvasion Pylint"]
-    types:
-      - completed
-  # push:
-  #   branches:
-  #     - main
+  # workflow_run:
+  #   workflows: ["AlienInvasion Pylint"]
+  #   types:
+  #     - completed
+  push:
+    branches:
+      - main
 
 
 #     branches: ["main"]
