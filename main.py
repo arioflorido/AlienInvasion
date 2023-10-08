@@ -1,7 +1,7 @@
 """
- Program   : alien_invasion.py
- Author    : Aaron Rioflorido
- Function  : Alien Invasion game's main file.
+Program   : alien_invasion.py
+Author    : Aaron Rioflorido
+Function  : Alien Invasion game's main file.
 """
 import pygame
 from pygame.sprite import Group
