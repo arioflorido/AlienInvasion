@@ -10,7 +10,7 @@ WORKDIR /code
 
 # Install the dependencies
 COPY Pipfile Pipfile.lock ./
-RUN sudo apt-get -y install python-dev-is-python3 libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev subversion libportmidi-dev ffmpeg libswscale-dev libavformat-dev libavcodec-dev libfreetype6-dev
+RUN apt-get update && apt-get install -y python-dev-is-python3 libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev subversion libportmidi-dev ffmpeg libswscale-dev libavformat-dev libavcodec-dev libfreetype6-dev
 RUN python3 -m pip install --upgrade pip
 RUN pip install pipenv
 RUN pipenv install --system --python 3
