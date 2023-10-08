@@ -1,11 +1,9 @@
-#######################################################
-# Program   : ship.py
-# Author    : Aaron Rioflorido
-#
-# Function  : Contains the Ship class for the Alien Invasion Game.
-#
-#######################################################
-import pygame
+"""
+Program   : ship.py
+Author    : Aaron Rioflorido
+Function  : Contains the Ship class for the Alien Invasion Game.
+"""
+from pygame import image
 from pygame.sprite import Sprite
 
 
@@ -19,13 +17,13 @@ class Ship(Sprite):
         self.ai_settings = ai_settings
 
         # Load the ship image and get its rect.
-        self.image = pygame.image.load('images/ship.bmp')
+        self.image = image.load("images/ship.bmp")
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
         # Start each new ship at the bottom center of the screen.
-        self.rect.centerx = self.screen_rect.centerx   # x coordinate
-        self.rect.bottom = self.screen_rect.bottom     # y coordinate
+        self.rect.centerx = self.screen_rect.centerx  # x coordinate
+        self.rect.bottom = self.screen_rect.bottom  # y coordinate
 
         # Store decimal values for the ship's center and bottom.
         self.center = float(self.rect.centerx)
@@ -40,7 +38,7 @@ class Ship(Sprite):
         self.turbo_mode = False
 
     def center_ship(self):
-        """Center the ship on the screen"""
+        """Center the ship on the screen."""
         self.center = float(self.screen_rect.centerx)
         self.bottom = float(self.screen_rect.bottom)
 
